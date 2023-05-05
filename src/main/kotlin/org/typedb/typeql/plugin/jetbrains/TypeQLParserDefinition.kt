@@ -122,11 +122,11 @@ class TypeQLParserDefinition : ParserDefinition {
         }
 
         fun getRuleTypePropertyElement(node: ASTNode): PsiTypeQLElement? {
-            if (node.firstChildNode != null && (node.firstChildNode.text == "owns" || node.firstChildNode.text == "key")) {
-                val ownsTo = node.lastChildNode.text
-                if (ownsTo.isNotEmpty()) {
+            if (node.firstChildNode != null && node.firstChildNode.text == "owns") {
+                //val ownsTo = node.lastChildNode.text
+                //if (ownsTo.isNotEmpty()) {
                     return PsiOwnsTypeConstraint(node)
-                }
+                //}
             } else if (node.firstChildNode != null && node.firstChildNode.text == "plays") {
                 val playsTo = node.lastChildNode.text
                 if (playsTo.isNotEmpty()) {
@@ -139,7 +139,7 @@ class TypeQLParserDefinition : ParserDefinition {
                 }
             } else if (node.firstChildNode != null && node.firstChildNode.text == "sub") {
                 val subsTo = node.lastChildNode.text
-                if (subsTo.isNotEmpty() && !TypeQLLanguage.GRAQL_TYPES.contains(subsTo)) {
+                if (subsTo.isNotEmpty() && !TypeQLLanguage.TYPEQL_TYPES.contains(subsTo)) {
                     return PsiSubTypeConstraint(node)
                 }
             }

@@ -186,7 +186,7 @@ class TypeQLCompletionContributor : CompletionContributor() {
     }
 
     private fun includeBaseTypes(resultSet: CompletionResultSet) {
-        TypeQLLanguage.GRAQL_TYPES.forEach(Consumer {
+        TypeQLLanguage.TYPEQL_TYPES.forEach(Consumer {
             resultSet.addElement(
                 LookupElementBuilder.create(
                     it!!

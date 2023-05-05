@@ -20,8 +20,8 @@ class TypeQLFileType private constructor() : LanguageFileType(TypeQLLanguage.INS
         return "tql"
     }
 
-    override fun getIcon(): Icon? {
-        return IconLoader.findIcon("/icons/typedb.svg")
+    override fun getIcon(): Icon {
+        return TypeQLIcons.TypeQL
     }
 
     companion object {

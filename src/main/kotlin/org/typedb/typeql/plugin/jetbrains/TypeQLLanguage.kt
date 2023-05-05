@@ -9,6 +9,6 @@ import com.intellij.lang.Language
 class TypeQLLanguage : Language("TypeQL") {
     companion object {
         val INSTANCE: TypeQLLanguage = TypeQLLanguage()
-        val GRAQL_TYPES: Set<String?> = ImmutableSet.of("attribute", "entity", "relation", "rule")
+        val TYPEQL_TYPES: Set<String?> = ImmutableSet.of("attribute", "entity", "relation", "rule")
     }
 }

@@ -25,14 +25,21 @@ class TypeQLUndefinedDeclarationInspection : LocalInspectionTool() {
                     identifiers.addAll(element.findOwnsTypeProperties())
                     identifiers.addAll(element.findPlaysTypeProperties())
                     identifiers.addAll(element.findSubTypeProperties())
+
                     for (identifier in identifiers) {
                         if (StringUtils.isEmpty(identifier!!.name)) {
                             return  //user still typing
                         }
+
                         val declaration = TypeQLPsiUtils.findDeclaration(
                             identifier.project, identifier
                         )
+
                         if (declaration == null) {
+                            //if(identifier.node.lastChildNode.elementType.toString() == "annotations_owns") {
+                            //    return;
+                            //}
+
                             var undefinedConcept: PsiElement
                             undefinedConcept =
                                 if (identifier.firstChild != null && identifier.firstChild.nextSibling != null && identifier.firstChild.nextSibling.nextSibling != null) {
@@ -40,9 +47,10 @@ class TypeQLUndefinedDeclarationInspection : LocalInspectionTool() {
                                 } else {
                                     return  //user still typing
                                 }
-                            if (TypeQLLanguage.GRAQL_TYPES.contains(undefinedConcept.text)) {
+                            if (TypeQLLanguage.TYPEQL_TYPES.contains(undefinedConcept.text)) {
                                 return  //defined by language
                             }
+
                             if (undefinedConcept.firstChild !is PsiErrorElement) {
                                 holder.registerProblem(
                                     undefinedConcept,

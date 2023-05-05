@@ -229,7 +229,7 @@ object TypeQLPsiUtils {
         }
         if (identifier is PsiRelatesTypeConstraint) {
             return "role"
-        } else if (TypeQLLanguage.GRAQL_TYPES.contains(subType)) {
+        } else if (TypeQLLanguage.TYPEQL_TYPES.contains(subType)) {
             return subType
         }
         val searchScope: Collection<VirtualFile?>

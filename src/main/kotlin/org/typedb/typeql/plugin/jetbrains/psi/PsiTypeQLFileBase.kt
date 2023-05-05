@@ -9,6 +9,7 @@ import com.intellij.psi.PsiNamedElement
 import org.typedb.typeql.plugin.jetbrains.TypeQLFileType
 import org.typedb.typeql.plugin.jetbrains.TypeQLLanguage
 import org.antlr.intellij.adaptor.psi.ScopeNode
+import org.typedb.typeql.plugin.jetbrains.TypeQLIcons
 import javax.swing.Icon
 
 /**
@@ -24,8 +25,8 @@ class PsiTypeQLFileBase(viewProvider: FileViewProvider) : PsiFileBase(viewProvid
         return "TypeQL Language file"
     }
 
-    override fun getIcon(flags: Int): Icon? {
-        return IconLoader.findIcon("/icons/typedb.svg")
+    override fun getIcon(flags: Int): Icon {
+        return TypeQLIcons.TypeQL
     }
 
     /**

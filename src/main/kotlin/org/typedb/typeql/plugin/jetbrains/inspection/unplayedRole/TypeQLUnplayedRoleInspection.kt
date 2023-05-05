@@ -22,15 +22,15 @@ class TypeQLUnplayedRoleInspection : LocalInspectionTool() {
                     && identifier !is PsiStatementType
                 ) {
                     TypeQLPsiUtils.ensureTypeQLElementsUpToDate(identifier.getContainingFile())
-                    val identifierElement = identifier
                     val declaration = TypeQLPsiUtils.findDeclaration(
-                        identifier.getProject(), identifierElement
+                        identifier.getProject(), identifier
                     )
+
                     if (declaration != null) {
                         val type = TypeQLPsiUtils.determineDeclarationType(declaration)
                         if ("role" == type) {
                             var isPlayed = false
-                            val usages = TypeQLPsiUtils.findUsages(identifierElement)
+                            val usages = TypeQLPsiUtils.findUsages(identifier)
                             for (usage in usages) {
                                 if (usage is PsiPlaysTypeConstraint) {
                                     isPlayed = true

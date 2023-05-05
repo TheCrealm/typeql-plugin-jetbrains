@@ -23,8 +23,8 @@ class TypeQLFindUsagesProvider : FindUsagesProvider {
         val lexer = TypeQLLexer(null)
         return DefaultWordsScanner(
             ANTLRLexerAdaptor(TypeQLLanguage.INSTANCE, lexer),
-            TypeQLParserDefinition.Companion.IDS,
-            TypeQLParserDefinition.Companion.COMMENTS,
+            TypeQLParserDefinition.IDS,
+            TypeQLParserDefinition.COMMENTS,
             TokenSet.EMPTY
         )
     }

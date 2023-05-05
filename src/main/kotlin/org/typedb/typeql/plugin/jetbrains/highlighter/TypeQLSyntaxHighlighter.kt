@@ -25,17 +25,18 @@ class TypeQLSyntaxHighlighter : SyntaxHighlighterBase() {
     override fun getTokenHighlights(tokenType: IElementType): Array<TextAttributesKey> {
         if (tokenType !is TokenIElementType) return EMPTY_KEYS
         if (tokenType == TokenType.BAD_CHARACTER) return arrayOf(BAD_CHARACTER)
-        val type = tokenType.antlrTokenType
-        val attrKey: TextAttributesKey
-        attrKey = when (type) {
+
+        val attrKey: TextAttributesKey = when (tokenType.antlrTokenType) {
             TypeQLLexer.IID_, TypeQLLexer.VAR_, TypeQLLexer.VAR_NAMED_, TypeQLLexer.LABEL_, TypeQLLexer.LABEL_SCOPED_ -> ID
             TypeQLLexer.THING, TypeQLLexer.ENTITY, TypeQLLexer.ATTRIBUTE, TypeQLLexer.RELATION, TypeQLLexer.ROLE, TypeQLLexer.RULE -> THING
-            TypeQLLexer.DEFINE, TypeQLLexer.UNDEFINE, TypeQLLexer.MATCH, TypeQLLexer.GET, TypeQLLexer.INSERT, TypeQLLexer.DELETE, TypeQLLexer.COMPUTE, TypeQLLexer.OFFSET, TypeQLLexer.LIMIT, TypeQLLexer.GROUP, TypeQLLexer.SORT, TypeQLLexer.ASC, TypeQLLexer.DESC, TypeQLLexer.CENTRALITY, TypeQLLexer.USING, TypeQLLexer.ABSTRACT, TypeQLLexer.AS, TypeQLLexer.TYPE, TypeQLLexer.ISA, TypeQLLexer.ISAX, TypeQLLexer.ISA_, TypeQLLexer.SUB, TypeQLLexer.SUBX, TypeQLLexer.SUB_, TypeQLLexer.OWNS, TypeQLLexer.PLAYS, TypeQLLexer.RELATES, TypeQLLexer.VALUE, TypeQLLexer.REGEX, TypeQLLexer.WHEN, TypeQLLexer.THEN, TypeQLLexer.LONG, TypeQLLexer.DOUBLE, TypeQLLexer.STRING, TypeQLLexer.BOOLEAN, TypeQLLexer.DATETIME -> KEYWORD
+            TypeQLLexer.DEFINE, TypeQLLexer.UNDEFINE, TypeQLLexer.MATCH, TypeQLLexer.GET, TypeQLLexer.INSERT, TypeQLLexer.DELETE, TypeQLLexer.COMPUTE, TypeQLLexer.OFFSET, TypeQLLexer.LIMIT, TypeQLLexer.GROUP, TypeQLLexer.SORT, TypeQLLexer.ASC, TypeQLLexer.DESC, TypeQLLexer.ABSTRACT, TypeQLLexer.AS, TypeQLLexer.TYPE, TypeQLLexer.ISA, TypeQLLexer.ISAX, TypeQLLexer.ISA_, TypeQLLexer.SUB, TypeQLLexer.SUBX, TypeQLLexer.SUB_, TypeQLLexer.OWNS, TypeQLLexer.PLAYS, TypeQLLexer.RELATES, TypeQLLexer.VALUE, TypeQLLexer.REGEX, TypeQLLexer.WHEN, TypeQLLexer.THEN, TypeQLLexer.LONG, TypeQLLexer.DOUBLE, TypeQLLexer.STRING, TypeQLLexer.BOOLEAN, TypeQLLexer.DATETIME -> KEYWORD
             TypeQLLexer.COMMENT -> LINE_COMMENT
             TypeQLLexer.LONG_, TypeQLLexer.DOUBLE_, TypeQLLexer.BOOLEAN_, TypeQLLexer.DATE_, TypeQLLexer.DATETIME_ -> NUMBER
             TypeQLLexer.STRING_ -> STRING
+            TypeQLLexer.ANNOTATION_KEY -> ANNOTATION
             else -> return EMPTY_KEYS
         }
+
         return arrayOf(attrKey)
     }
 
@@ -48,8 +49,8 @@ class TypeQLSyntaxHighlighter : SyntaxHighlighterBase() {
         val NUMBER = TextAttributesKey.createTextAttributesKey("GQL_NUMBER", DefaultLanguageHighlighterColors.NUMBER)
         val ID = TextAttributesKey.createTextAttributesKey("GQL_IDENTIFIER", DefaultLanguageHighlighterColors.CONSTANT)
         val THING = TextAttributesKey.createTextAttributesKey("GQL_THING", DefaultLanguageHighlighterColors.IDENTIFIER)
-        val BAD_CHARACTER =
-            TextAttributesKey.createTextAttributesKey("SIMPLE_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
+        val BAD_CHARACTER = TextAttributesKey.createTextAttributesKey("SIMPLE_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
+        val ANNOTATION = TextAttributesKey.createTextAttributesKey("ANNOTATION", DefaultLanguageHighlighterColors.METADATA)
 
         init {
             PSIElementTypeFactory.defineLanguageIElementTypes(
